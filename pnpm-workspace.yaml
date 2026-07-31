@@ -12,7 +12,6 @@ ignoredBuiltDependencies:
   - workerd
 allowBuilds:
   core-js: false
-  electron: true
   esbuild: false
   protobufjs: false
   sharp: false
