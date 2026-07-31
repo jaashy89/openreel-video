@@ -4,20 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  '@ffmpeg/core-mt@0.12.6': 1db576e198964d4a82c691ec4293b9ad610f72c6719dd47353a4b4c214f57406
-  '@ffmpeg/core@0.12.6': 5bfd88f7e0c6a0492ec3a58252eb9a6afe8734f1583a55cd6a8d7212b95ebe32
-
 importers:
 
   .:
     dependencies:
       '@ffmpeg/core':
         specifier: 0.12.6
-        version: 0.12.6(patch_hash=5bfd88f7e0c6a0492ec3a58252eb9a6afe8734f1583a55cd6a8d7212b95ebe32)
+        version: 0.12.6
       '@ffmpeg/core-mt':
         specifier: 0.12.6
-        version: 0.12.6(patch_hash=1db576e198964d4a82c691ec4293b9ad610f72c6719dd47353a4b4c214f57406)
+        version: 0.12.6
       mediabunny:
         specifier: ^1.25.3
         version: 1.25.3
@@ -195,10 +191,10 @@ importers:
     dependencies:
       '@ffmpeg/core':
         specifier: 0.12.6
-        version: 0.12.6(patch_hash=5bfd88f7e0c6a0492ec3a58252eb9a6afe8734f1583a55cd6a8d7212b95ebe32)
+        version: 0.12.6
       '@ffmpeg/core-mt':
         specifier: 0.12.6
-        version: 0.12.6(patch_hash=1db576e198964d4a82c691ec4293b9ad610f72c6719dd47353a4b4c214f57406)
+        version: 0.12.6
       '@ffmpeg/ffmpeg':
         specifier: ^0.12.15
         version: 0.12.15
@@ -4912,9 +4908,9 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@ffmpeg/core-mt@0.12.6(patch_hash=1db576e198964d4a82c691ec4293b9ad610f72c6719dd47353a4b4c214f57406)': {}
+  '@ffmpeg/core-mt@0.12.6': {}
 
-  '@ffmpeg/core@0.12.6(patch_hash=5bfd88f7e0c6a0492ec3a58252eb9a6afe8734f1583a55cd6a8d7212b95ebe32)': {}
+  '@ffmpeg/core@0.12.6': {}
 
   '@ffmpeg/ffmpeg@0.12.15':
     dependencies:
