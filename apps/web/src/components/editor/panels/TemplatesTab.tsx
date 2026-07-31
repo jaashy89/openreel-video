@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { Box, Search, Layout, Clock, X, Loader2, Sparkles } from "@/icons/lucide-compat";
+import {  Search, Layout, Clock, X, Loader2, Sparkles } from "@/icons/lucide-compat";
 import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftSelectableCard as SelectableCard } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
