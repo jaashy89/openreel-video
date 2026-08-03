@@ -10,7 +10,6 @@ import { useUIStore } from "./stores/ui-store";
 import { useProjectStore } from "./stores/project-store";
 import { useRouter } from "./hooks/use-router";
 import { useProjectRecovery } from "./hooks/useProjectRecovery";
-import { useExtensionBridge } from "./hooks/useExtensionBridge";
 import { useKieAIPoller } from "./hooks/useKieAIPoller";
 import { useGpuJobPoller } from "./hooks/useGpuJobPoller";
 import { SOCIAL_MEDIA_PRESETS, type SocialMediaCategory } from "@openreel/core";
@@ -57,7 +56,6 @@ function App() {
 
   useKieAIPoller();
   useGpuJobPoller();
-  useExtensionBridge();
 
   useEffect(() => {
     if (hasHandledInitialRoute.current) return;

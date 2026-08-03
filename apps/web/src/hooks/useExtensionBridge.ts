@@ -11,25 +11,21 @@ import { useProjectStore } from "../stores/project-store";
  * Extension → App messages:
  *   { type: "openreel-video", blob: Blob, name?: string }
  *
- * App → Extension messages:
- *   { type: "openreel-ready" }  — sent once the app is listening
- *   { type: "openreel-imported", success: boolean, error?: string }
+ * Only activates when `ready` is true (bridges initialized).
  */
-export function useExtensionBridge() {
-  const hasSignaledReady = useRef(false);
+export function useExtensionBridge(ready: boolean) {
+  const hasProcessed = useRef(false);
 
   useEffect(() => {
-    // Signal to the opener (extension) that this tab is ready to receive video
-    if (window.opener && !hasSignaledReady.current) {
-      hasSignaledReady.current = true;
-      window.opener.postMessage({ type: "openreel-ready" }, "*");
-    }
+    if (!ready) return;
 
     const handler = async (event: MessageEvent) => {
-      // Accept messages from any origin so the extension can send from
-      // chrome-extension://<id> without us knowing the exact ID.
+      // Only process one video per session
+      if (hasProcessed.current) return;
       if (event.data?.type !== "openreel-video") return;
       if (!event.data?.blob) return;
+
+      hasProcessed.current = true;
 
       const blob: Blob = event.data.blob;
       const fileName: string = event.data.name || "recording.mp4";
@@ -62,30 +58,13 @@ export function useExtensionBridge() {
           await store.addClipToNewTrack(mediaItem.id);
         }
 
-        // Report success back to the extension
-        if (event.source && "postMessage" in event.source) {
-          (event.source as Window).postMessage(
-            { type: "openreel-imported", success: true },
-            { targetOrigin: "*" },
-          );
-        }
+        console.log("[ExtensionBridge] Video imported successfully:", fileName);
       } catch (err) {
         console.error("[ExtensionBridge] Failed to import video:", err);
-
-        if (event.source && "postMessage" in event.source) {
-          (event.source as Window).postMessage(
-            {
-              type: "openreel-imported",
-              success: false,
-              error: err instanceof Error ? err.message : "Unknown error",
-            },
-            { targetOrigin: "*" },
-          );
-        }
       }
     };
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, []);
+  }, [ready]);
 }
