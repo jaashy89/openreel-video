@@ -17,7 +17,6 @@ import { useProjectStore } from "../../stores/project-store";
 import { useUIStore } from "../../stores/ui-store";
 import { useEngineStore } from "../../stores/engine-store";
 import { useKeyboardShortcuts } from "../../hooks/useKeyboardShortcuts";
-import { useExtensionBridge } from "../../hooks/useExtensionBridge";
 import {
   initializePlaybackBridge,
   disposePlaybackBridge,
@@ -218,7 +217,6 @@ export const EditorInterface: React.FC = () => {
   const { showShortcutsOverlay, setShowShortcutsOverlay } =
     useKeyboardShortcuts();
   useAutoSave();
-  useExtensionBridge(initialized);
 
   const {
     keyframeEditorOpen,
