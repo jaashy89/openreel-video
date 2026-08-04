@@ -26,12 +26,15 @@ export function useExtensionBridge() {
       const fileName: string = event.data.name || "recording.mp4";
 
       (async () => {
+        const store = useProjectStore.getState();
+        store.setLoading(true);
+        store.setError(null);
+
         try {
           const file = new File([blob], fileName, {
             type: blob.type || "video/mp4",
           });
 
-          const store = useProjectStore.getState();
           store.createNewProject(`From Extension — ${fileName}`);
 
           const importResult = await store.importMedia(file);
@@ -49,7 +52,11 @@ export function useExtensionBridge() {
             await store.addClipToNewTrack(mediaItem.id);
           }
         } catch (err) {
+          const message = err instanceof Error ? err.message : "Unknown error";
           console.error("[ExtensionBridge] Failed to import video:", err);
+          store.setError(message);
+        } finally {
+          store.setLoading(false);
         }
       })();
     };

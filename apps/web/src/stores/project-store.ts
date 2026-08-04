@@ -135,6 +135,8 @@ export interface ProjectState {
   // Loading state
   isLoading: boolean;
   error: string | null;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
 
   createNewProject: (
     name?: string,
@@ -1698,6 +1700,8 @@ export const useProjectStore = create<ProjectState>()(
       redoJournal: [] as Array<"action" | "clip" | "template">,
       isLoading: false,
       error: null,
+      setLoading: (loading: boolean) => set({ isLoading: loading }),
+      setError: (error: string | null) => set({ error }),
       clipboard: [] as TimelineClipboardItem[],
       lastPastedClipIds: [] as string[],
       copiedEffects: [] as Effect[],

@@ -123,6 +123,8 @@ export interface ProjectState {
   redoJournal: Array<"action" | "clip" | "template">;
   isLoading: boolean;
   error: string | null;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
   clipboard: TimelineClipboardItem[];
   lastPastedClipIds: string[];
   copiedEffects: Effect[];
